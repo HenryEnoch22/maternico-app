@@ -20,10 +20,11 @@ return [
     'allowed_methods' => ['*'],
 
     'allowed_origins' => [/*env('FRONTEND_URL', 'http://localhost:3000')*/
-        'http://localhost',
-        'http://192.168.100.18:8081',
-        'http://192.168.100.18:19000',
-        'http://192.168.100.18:19001',
+        // 'http://localhost',
+        // 'http://192.168.100.18:8081',
+        // 'http://192.168.100.18:19000',
+        // 'http://192.168.100.18:19001',
+        "*"
     ],
 
     'allowed_origins_patterns' => [],

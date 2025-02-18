@@ -1,6 +1,6 @@
 import { View, Text, TextInput, StyleSheet } from "react-native";
 
-export default function FormTextField({ label, ...props}) {
+export default function FormTextField({ label, errors = [], ...props}) {
     return (
         <View>
             {label && (
@@ -13,6 +13,11 @@ export default function FormTextField({ label, ...props}) {
                 autoCapitalize="none"
                 {...props}
             />
+            {errors.map((error, index) => (
+                <Text key={index} style={styles.errors}>
+                    {error}
+                </Text>
+            ))}
         </View>
     );
 }
@@ -30,4 +35,8 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         marginTop: 4,
     },
+    errors: {
+        color: "red",
+        marginTop: 2,
+    }
 });
