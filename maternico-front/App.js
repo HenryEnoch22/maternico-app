@@ -31,11 +31,32 @@ export default function App() {
 			<NavigationContainer>
 				<Stack.Navigator>
 					{user ? (
-						<Stack.Screen name="Home" component={HomeScreen} />
+						<Stack.Screen
+							name="Home"
+							options={
+							{
+								headerShown: false,
+							}
+							}
+							component={HomeScreen} />
 					) : (
 						<>
-							<Stack.Screen name="Login" component={LoginScreen} />
-							<Stack.Screen name="Register" component={RegisterScreen} />
+							<Stack.Screen
+								name="Login"
+								options={
+								{
+									headerShown: false,
+								}
+								}
+								component={LoginScreen} />
+							<Stack.Screen
+								name="Register"
+								options={
+								{
+									headerShown: false,
+								}
+								}
+								component={RegisterScreen} />
 						</>
 					)}
 				</Stack.Navigator>
