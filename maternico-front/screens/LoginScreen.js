@@ -1,33 +1,30 @@
 import { SafeAreaView, View, StyleSheet, Button, Platform } from "react-native";
 import FormTextField from "../components/FormTextField";
-import { useState } from "react";
-import axios from "../utils/axios";
+import { useState, useContext } from "react";
+import { login, loadUser } from "../services/AuthService";
+import AuthContext from "../contexts/AuthContext";
 
 export default function LoginScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
 
+    const { setUser } = useContext(AuthContext);
+
     const handleLogin = async () => {
         setErrors({});
 
         try {
-            const {data} = await axios.post(
-                "/login", 
-            {
+            await login({
                 email,
                 password,
                 device_name: `${Platform.OS} ${Platform.Version}`
-            })
-
-            const { data: user } = await axios.get("/user", {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
             });
-    
-            console.log(token)
+
+            const user = await loadUser();
+            setUser(user);
         } catch (e) {
+            console.error("Error:", e);
             if (e.response?.status === 422) {
                 setErrors(e.response.data.errors);
             }
