@@ -1,0 +1,42 @@
+import { View, Text, TextInput, StyleSheet } from "react-native";
+
+export default function FormTextField({ label, errors = [], ...props}) {
+    return (
+        <View>
+            {label && (
+                <Text style={styles.label}>
+                        {label}
+                </Text>
+            )}
+            <TextInput
+                style={styles.textInput}
+                autoCapitalize="none"
+                {...props}
+            />
+            {errors.map((error, index) => (
+                <Text key={index} style={styles.errors}>
+                    {error}
+                </Text>
+            ))}
+        </View>
+    );
+}
+
+const styles = StyleSheet.create({  
+    label: {
+        color: "#334155",
+        fontWeight: 500,
+    },
+    textInput: {
+        padding: 10,
+        backgroundColor: "#f1f5f9",
+        borderColor: "#cbd5e1",
+        borderWidth: 1,
+        borderRadius: 4,
+        marginTop: 4,
+    },
+    errors: {
+        color: "red",
+        marginTop: 2,
+    }
+});
