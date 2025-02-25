@@ -60,6 +60,15 @@ return [
             'report' => false,
         ],
 
+        'magazine' => [
+            'driver' => 'local',
+            'root' => storage_path('app/magazine'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+            'throw' => false,
+            'report' => false,
+        ],
+
     ],
 
     /*
@@ -75,6 +84,7 @@ return [
 
     'links' => [
         public_path('storage') => storage_path('app/public'),
+        public_path('storage/magazine') => storage_path('app/magazine'),
     ],
 
 ];
