@@ -1,4 +1,4 @@
-import {View, Text, StyleSheet, TouchableOpacity, SafeAreaView} from "react-native";
+import {View, Text, StyleSheet, TouchableOpacity, SafeAreaView, FlatList, ScrollView} from "react-native";
 import { useContext } from "react";
 import AuthContext from "../contexts/AuthContext";
 import { logout } from "../services/AuthService";
@@ -8,23 +8,31 @@ import {
     BellIcon, UserCircleIcon, ChatBubbleLeftEllipsisIcon
 } from "react-native-heroicons/solid"
 
-const EventCard = () => {
+const EventCard = ({text, days}) => {
 
     const eventStyles = StyleSheet.create({
         container: {
             flex: 1,
             justifyContent: "center",
             padding: 10,
-            backgroundColor: "#f392bea0",
+            borderStyle: "solid",
+            borderLeftColor: "#f392be",
+            borderLeftWidth: 2,
             marginHorizontal: 4,
             borderRadius: 4,
-            minWidth: 160,
+            width: 170,
+            maxWidth: 170,
             minHeight: 72,
+            shadowColor: "#000",
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.1,
+            shadowRadius: 4,
+            // Sombra para Android
+            elevation: 3,
         },
         header: {
             flexDirection: "row",
             alignItems: "center",
-            color: "#fefefe",
             fontSize: 12,
             gap: 8,
             marginBottom: 12,
@@ -40,7 +48,7 @@ const EventCard = () => {
         footer: {
             flexDirection: "row",
             justifyContent: "flex-start",
-            backgroundColor: "#f392be",
+            backgroundColor: "#F4D18A",
             borderRadius: 4,
             paddingHorizontal: 4
         }
@@ -52,10 +60,10 @@ const EventCard = () => {
                 <View style={eventStyles.iconContainer}>
                     <CalendarDaysIcon color="#fefefe" size="24" />
                 </View>
-                <Text style={{color: "#fefefe", fontWeight: "bold", fontSize: 16}}>Cita médica</Text>
+                <Text style={{color: "#f392be", fontWeight: "bold", fontSize: 16}}>{text}</Text>
             </View>
             <View style={eventStyles.footer}>
-                <Text style={{color: "#fefefe"}}>6 días restantes</Text>
+                <Text style={{color: "#fefefe"}}>{`${days} días restantes`}</Text>
             </View>
         </View>
     )
@@ -181,6 +189,27 @@ const BabyCard = () => {
     )
 }
 
+const data = [
+    {
+        id: 1,
+        name: "Cita médica",
+        leftDays: 6,
+        icon: CalendarDaysIcon,
+    },
+    {
+        id: 2,
+        name: "Cita médica",
+        leftDays: 8,
+        icon: CalendarDaysIcon,
+    },
+    {
+        id: 3,
+        name: "Cita médica",
+        leftDays: 11,
+        icon: CalendarDaysIcon,
+    },
+]
+
 export default function HomeScreen() {
     const { user, setUser } = useContext(AuthContext);
 
@@ -195,7 +224,7 @@ export default function HomeScreen() {
 
     return (
         // TODO: Layout para incluir navbar
-        <SafeAreaView>
+        <ScrollView>
             <View style={styles.topView}> {/*TOP VIEW */}
                 <View style={styles.iconsContainer}>
                     <BellIcon size="32" color="#fefefe" />
@@ -211,9 +240,12 @@ export default function HomeScreen() {
                 <View style={styles.eventsContainer}>
                     <Text style={styles.sectionTitle}>Proximos Eventos</Text>
                     <View style={styles.events}>
-                        <EventCard />
-                        <EventCard />
-                        <EventCard />
+                        <FlatList
+                            data={data}
+                            horizontal={true} // Hace que la lista sea horizontal
+                            showsHorizontalScrollIndicator={false} // Oculta la barra de desplazamiento horizontal
+                            renderItem={({item}) => <EventCard text={item.name} days={item.leftDays} />}
+                            keyExtractor={item => item.id.toString()} />
                     </View>
                 </View>
 
@@ -227,7 +259,7 @@ export default function HomeScreen() {
                     <BabyCard />
                 </View>
             </View>
-        </SafeAreaView>
+        </ScrollView>
     );
 }
 
@@ -274,8 +306,6 @@ const styles = StyleSheet.create({
         marginBottom: 12,
     },
     events: {
-        flexDirection: "row",
-        justifyContent: "space-between",
         marginBottom: 40,
     },
     section: {
