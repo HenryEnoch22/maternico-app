@@ -12,15 +12,18 @@ Route::middleware('auth:sanctum')->group(function () {
         return $request->user();
     });
 
-    Route::get('hola-mundo', function () {
-        return response()->json(['message' => 'Hola Mundo!']);
-    });
-
     Route::post('logout', function (Request $request) {
         $request->user()->currentAccessToken()->delete();
         return response()->json(['message' => 'Sesión cerrada']);
     });
-    
+
+    //Magazines
+    Route::get('magazines/{category}', [\App\Http\Controllers\MagazineController::class, 'index'])->name('magazines.index');
+    Route::post('magazines', [\App\Http\Controllers\MagazineController::class, 'store'])->name('magazines.store');
+    Route::get('magazines/{id}', [\App\Http\Controllers\MagazineController::class, 'show'])->name('magazines.show');
+    Route::put('magazines/{id}', [\App\Http\Controllers\MagazineController::class, 'update'])->name('magazines.update');
+    Route::delete('magazines/{id}', [\App\Http\Controllers\MagazineController::class, 'destroy'])->name('magazines.destroy');
+
 });
 
 Route::post('login', function (Request $request) {
