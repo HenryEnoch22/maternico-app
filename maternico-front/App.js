@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
+import ProfileScreen from "./screens/ProfileScreen"; // Importar ProfileScreen
 import AuthContext from "./contexts/AuthContext";
 import { loadUser } from "./services/AuthService";
 import { useEffect, useState } from "react";
@@ -10,7 +11,6 @@ import RegisterScreen from "./screens/RegisterScreen";
 const Stack = createNativeStackNavigator();
 
 export default function App() {
-
 	const [user, setUser] = useState(null);
 
 	useEffect(() => {
@@ -31,32 +31,37 @@ export default function App() {
 			<NavigationContainer>
 				<Stack.Navigator>
 					{user ? (
-						<Stack.Screen
-							name="Home"
-							options={
-							{
-								headerShown: false,
-							}
-							}
-							component={HomeScreen} />
+						<>
+							<Stack.Screen
+								name="Home"
+								options={{ headerShown: false }}
+								component={HomeScreen}
+							/>
+							<Stack.Screen
+								name="Profile"
+								options={{
+									headerShown: true,
+									title: "Mi Perfil",
+									headerTintColor: "#fff",
+									headerStyle: {
+										backgroundColor: "#f283b5",
+									}
+								}}
+								component={ProfileScreen}
+							/>
+						</>
 					) : (
 						<>
 							<Stack.Screen
 								name="Login"
-								options={
-								{
-									headerShown: false,
-								}
-								}
-								component={LoginScreen} />
+								options={{ headerShown: false }}
+								component={LoginScreen}
+							/>
 							<Stack.Screen
 								name="Register"
-								options={
-								{
-									headerShown: false,
-								}
-								}
-								component={RegisterScreen} />
+								options={{ headerShown: false }}
+								component={RegisterScreen}
+							/>
 						</>
 					)}
 				</Stack.Navigator>
