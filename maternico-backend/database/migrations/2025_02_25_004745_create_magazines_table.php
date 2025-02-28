@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title', 64);
             $table->string('magazine_path', 2048);
-            $table->enum('category', ['0 a 1 año', '1 año', '2 años', '3 años', '4 años', '5 años']);
+            $table->enum('category', [0, 1, 2, 3, 4, 5]);
             $table->timestamps();
             $table->softDeletes();
         });

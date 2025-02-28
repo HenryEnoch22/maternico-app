@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
+Route::get('magazines/{category}', [\App\Http\Controllers\MagazineController::class, 'index'])->name('magazines.index');
+
 Route::middleware('auth:sanctum')->group(function () {
     // Rutas protegidas
     Route::get('/user', function (Request $request) {
@@ -18,7 +20,7 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     //Magazines
-    Route::get('magazines/{category}', [\App\Http\Controllers\MagazineController::class, 'index'])->name('magazines.index');
+//    Route::get('magazines/{category}', [\App\Http\Controllers\MagazineController::class, 'index'])->name('magazines.index');
     Route::post('magazines', [\App\Http\Controllers\MagazineController::class, 'store'])->name('magazines.store');
     Route::get('magazines/{id}', [\App\Http\Controllers\MagazineController::class, 'show'])->name('magazines.show');
     Route::put('magazines/{id}', [\App\Http\Controllers\MagazineController::class, 'update'])->name('magazines.update');

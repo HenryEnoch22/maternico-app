@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Magazine;
 use Illuminate\Http\Request;
 
-class MagazineController extends Controller
+class VideoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index($category)
+    public function index()
     {
-        $magazines = Magazine::where('category', $category)->get();
-        return response()->json(['received_category' => $magazines]);
+        //
     }
 
-
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -29,11 +33,17 @@ class MagazineController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show($magazineId)
+    public function show(string $id)
     {
-        $magazine =  Magazine::findOrfail($magazineId);
-        $url = asset('magazines/' . basename($magazine->magazine_path));
-        return response()->json(['magazine' => $magazine, 'magazineUrl' => $url]);
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
     }
 
     /**
