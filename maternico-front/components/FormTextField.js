@@ -38,5 +38,16 @@ const styles = StyleSheet.create({
     errors: {
         color: "red",
         marginTop: 2,
-    }
+    },
+    inputContainer: {
+        marginBottom: 16,
+        borderWidth: 1,
+        borderColor: "#E1E1E1",
+        borderRadius: 8,
+        backgroundColor: "#F9F9F9",
+    },
+    input: {
+        padding: 16,
+        fontSize: 16,
+    },
 });
