@@ -39,7 +39,7 @@ const BabyCard = () => {
         dataText: {
             backgroundColor: "#f4d18aa0",
             color: "#343434",
-            fontWeight: "600",
+            fontWeight: "400",
             fontSize: 12,
             borderRadius: 4,
             paddingHorizontal: 12,
@@ -51,15 +51,15 @@ const BabyCard = () => {
         <View style={babyStyles.container}>
             <View style={babyStyles.header}>
                 <UserCircleIcon size="30" color="#f392be" />
-                <Text style={{fontSize: 18, fontWeight: "bold", color: "#343434"}}>Moisés</Text>
+                <Text style={{fontSize: 18, fontWeight: "600", color: "#343434"}}>Moisés</Text>
             </View>
             <View style={babyStyles.infoContainer}>
                 <View style={babyStyles.data}>
-                    <Text style={{fontSize: 20, fontWeight: "bold", color: "#343434"}}>Edad</Text>
+                    <Text style={{fontSize: 20, fontWeight: "400", color: "#343434"}}>Edad</Text>
                     <Text style={babyStyles.dataText}>8 meses</Text>
                 </View>
                 <View style={babyStyles.data}>
-                    <Text style={{fontSize: 20, fontWeight: "bold", color: "#343434"}}>Próxima vacuna</Text>
+                    <Text style={{fontSize: 20, fontWeight: "400", color: "#343434"}}>Próxima vacuna</Text>
                     <Text style={babyStyles.dataText}>Lopiteramida</Text>
                 </View>
             </View>

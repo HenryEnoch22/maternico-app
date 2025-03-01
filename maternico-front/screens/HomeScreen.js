@@ -62,7 +62,7 @@ export default function HomeScreen() {
         <ScrollView>
             <View style={styles.topView}>
                 <View style={styles.iconsContainer}>
-                    <Pressable onPress={() => alert("Presionaste un icono")}>
+                    <Pressable onPress={() => navigation.navigate('Calendar')}>
                         <BellIcon size="32" color="#fefefe" />
                     </Pressable>
                     <Pressable onPress={() => navigation.navigate('Profile')}>
@@ -84,7 +84,7 @@ export default function HomeScreen() {
                             horizontal={true}
                             showsHorizontalScrollIndicator={false}
                             renderItem={({item}) =>
-                                <Pressable onPress={() => alert("citita")}>
+                                <Pressable onPress={() => navigation.navigate('Magazine')}>
                                     <EventCard text={item.name} days={item.leftDays} typeEvent={item.typeEvent} />
                                 </Pressable>}
                             keyExtractor={item => item.id.toString()} />
