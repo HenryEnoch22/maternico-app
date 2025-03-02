@@ -1,23 +1,30 @@
 import { getToken, setToken } from "./TokenService";
 import axios from "../utils/axios";
 
-export async function login(credentials) {
-    const { data } = await axios.post("/login", credentials);
-    await setToken(data.token);
-    return data;
+export async function getCsrfToken() {
+    const token = await axios.get('/sanctum/csrf-cookie'); // Obtiene el token CSRF
+    console.log('Token CSRF obtenido:', token);
 }
 
+export async function login(credentials) {
+    await getCsrfToken(); // Asegúrate de obtener el token CSRF antes de hacer el login
+
+    try {
+        const response = await axios.post('/login', credentials);
+        console.log('Respuesta del servidor:', response.data);
+        return response.data;
+    } catch (error) {
+        console.error('Error en la solicitud POST:', error.response?.data);
+        throw error;
+    }
+}
+
+
 export async function loadUser() {
-    const token = await getToken();
+    const { data } = await axios.get('/api/user');
 
-    const { data: user } = await axios.get("/user", {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
-
-    console.log("Usuario desde API:", user);
-    return user;
+    console.log("Usuario desde API:", data);
+    return data;
 }
 
 export async function register(userData) {
@@ -27,13 +34,5 @@ export async function register(userData) {
 }
 
 export async function logout() {
-    const token = await getToken();
-
-    await axios.post("/logout", {}, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
-
-    await setToken(null);
+    await axios.post('/logout');
 }

@@ -15,16 +15,16 @@ return [
     |
     */
 
-    'paths' => ['api/*', 'sanctum/csrf-cookie'],
+    'paths' => ['/*','api/*', 'sanctum/csrf-cookie', 'login', 'logout', 'register'],
 
     'allowed_methods' => ['*'],
 
-    'allowed_origins' => [/*env('FRONTEND_URL', 'http://localhost:3000')*/
-        // 'http://localhost',
-        // 'http://192.168.100.18:8081',
-        // 'http://192.168.100.18:19000',
-        // 'http://192.168.100.18:19001',
-        "*"
+    'allowed_origins' => [
+//        env('FRONTEND_URL'),
+//        'http://192.168.1.72:8081',
+//        'http://localhost:8081'
+        'http://localhost:8081', // Origen de tu frontend
+        'http://192.168.1.72:8081',
     ],
 
     'allowed_origins_patterns' => [],

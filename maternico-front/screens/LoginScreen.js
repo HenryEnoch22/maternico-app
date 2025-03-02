@@ -25,11 +25,9 @@ export default function LoginScreen() {
 
             const user = await loadUser();
             setUser(user);
-        } catch (e) {
-            console.error("Error:", e);
-            if (e.response?.status === 422) {
-                setErrors(e.response.data.errors);
-            }
+        } catch (error) {
+            console.error('Error:', error.response?.data);
+            setErrors(error.response?.data?.errors || {});
         }
     };
 
