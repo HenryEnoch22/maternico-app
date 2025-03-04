@@ -25,7 +25,7 @@ class UserSeeder extends Seeder
                 'mother_last_name' => 'Herrera',
                 'birth_date' => '1995-10-10',
                 'email' => 'jpino@gmail.com',
-                'password' => Hash::make(123456789),
+                'password' => Hash::make('12345678'),
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],

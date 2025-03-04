@@ -32,7 +32,7 @@ Route::post('login', function (Request $request) {
     $request->validate([
         'email' => 'required|email',
         'password' => 'required',
-        'device_name' => 'required'
+        'device_name' => 'nullable|string',
     ]);
 
     $user = User::where('email', $request->email)->first();
@@ -44,8 +44,7 @@ Route::post('login', function (Request $request) {
     }
 
     return response()->json([
-        'token' => $user->createToken($request->device_name)->plainTextToken,
-        'user' => $user // Opcional: Enviar datos básicos del usuario
+        'token' => $user->createToken($request->email)->plainTextToken,
     ]);
 });
 
