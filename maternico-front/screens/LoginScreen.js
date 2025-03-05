@@ -5,6 +5,8 @@ import { login, loadUser } from "../services/AuthService";
 import AuthContext from "../contexts/AuthContext";
 import PrimaryButton from "../components/PrimaryButton";
 import logo from "../assets/logo/MaternicoLogo.png";
+import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native-web";
 
 export default function LoginScreen() {
     const [email, setEmail] = useState("");
@@ -12,6 +14,7 @@ export default function LoginScreen() {
     const [errors, setErrors] = useState({});
 
     const { setUser } = useContext(AuthContext);
+    const navigation = useNavigation();
 
     const handleLogin = async () => {
         setErrors({});
@@ -26,7 +29,6 @@ export default function LoginScreen() {
             const user = await loadUser();
             setUser(user);
         } catch (e) {
-            console.error("Error:", e);
             if (e.response?.status === 422) {
                 setErrors(e.response.data.errors);
             }
@@ -34,7 +36,7 @@ export default function LoginScreen() {
     };
 
     return (
-        <SafeAreaView style={styles.mainContainer}>
+        <View style={styles.mainContainer}>
             <View style={styles.topSection}>
                 <Text style={styles.greet}>Hola!</Text>
                 <Text style={styles.greetFoot}>Bienvenida a MaterniCo</Text>
@@ -53,6 +55,7 @@ export default function LoginScreen() {
                 <View style={styles.formContainer}>
                     <FormTextField
                         label="Correo Electrónico"
+                        placeholder="ejemplo@correo.com"
                         value={email}
                         onChangeText={(t) => setEmail(t)}
                         keyboardType="email-address"
@@ -62,6 +65,7 @@ export default function LoginScreen() {
 
                     <FormTextField
                         label="Contraseña"
+                        placeholder="********"
                         value={password}
                         onChangeText={(t) => setPassword(t)}
                         secureTextEntry
@@ -69,7 +73,7 @@ export default function LoginScreen() {
                         style={styles.customInput}
                     />
 
-                    <Pressable onPress={() => console.log("Olvidaste contraseña")}>
+                    <Pressable onPress={() => alert("Este servicio no está disponible por el momento, intenta mas tarde.")}>
                         <Text style={styles.forgotPassword}>¿Olvidaste tu contraseña?</Text>
                     </Pressable>
 
@@ -77,13 +81,13 @@ export default function LoginScreen() {
 
                     <View style={styles.registerContainer}>
                         <Text style={styles.registerText}>¿No tienes una cuenta? </Text>
-                        <Pressable onPress={() => console.log("Registro")}>
+                        <Pressable onPress={() => navigation.navigate("Register")}>
                             <Text style={styles.registerLink}>Regístrate!</Text>
                         </Pressable>
                     </View>
                 </View>
             </View>
-        </SafeAreaView>
+        </View>
     );
 }
 
