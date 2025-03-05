@@ -26,7 +26,7 @@ const ResponseCard = () => {
         },
         infoTitle: {
             fontSize: 14,
-            fontWeight: "bold",
+            fontWeight: "500",
             color: "#343434"
         },
         infoText: {
@@ -36,7 +36,7 @@ const ResponseCard = () => {
             fontSize: 12,
             borderRadius: 4,
             color: "#343434",
-            fontWeight: "500"
+            fontWeight: "400"
         },
     })
     return (
@@ -47,7 +47,7 @@ const ResponseCard = () => {
 
             <View style={responseStyles.info}>
                 <Text style={responseStyles.infoTitle}>Alguien hizo un comentario en tu foro</Text>
-                <View style={responseStyles.infoContainer}>
+                <View>
                     <Text style={responseStyles.infoText}>
                         1 comentario nuevo
                     </Text>

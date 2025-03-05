@@ -16,7 +16,6 @@ export async function loadUser() {
         }
     });
 
-    console.log("Usuario desde API:", user);
     return user;
 }
 

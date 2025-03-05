@@ -51,12 +51,12 @@ const EventCard = ({text, days, typeEvent}) => {
         },
         textStyle: {
             color: "#f392be",
-            fontWeight: "bold",
+            fontWeight: "500",
             fontSize: 16
         },
         daysStyles: {
             color: "#343434",
-            fontWeight: "600"
+            fontWeight: "400"
         }
     })
 

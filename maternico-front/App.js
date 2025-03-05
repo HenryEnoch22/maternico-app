@@ -2,11 +2,13 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import LoginScreen from "./screens/LoginScreen";
 import HomeScreen from "./screens/HomeScreen";
-import ProfileScreen from "./screens/ProfileScreen"; // Importar ProfileScreen
+import ProfileScreen from "./screens/ProfileScreen";
 import AuthContext from "./contexts/AuthContext";
 import { loadUser } from "./services/AuthService";
 import { useEffect, useState } from "react";
 import RegisterScreen from "./screens/RegisterScreen";
+import CalendarScreen from "./screens/CalendarScreen";
+import PDFViewer from "./screens/PDFViewer";
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +38,16 @@ export default function App() {
 								name="Home"
 								options={{ headerShown: false }}
 								component={HomeScreen}
+							/>
+							<Stack.Screen
+								name="Calendar"
+								options={{ headerShown: false }}
+								component={CalendarScreen}
+							/>
+							<Stack.Screen
+								name="Magazine"
+								options={{ headerShown: false }}
+								component={PDFViewer}
 							/>
 							<Stack.Screen
 								name="Profile"
