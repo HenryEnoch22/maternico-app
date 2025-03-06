@@ -1,4 +1,4 @@
-import { SafeAreaView, View, StyleSheet, Platform, Pressable, Text, Image } from "react-native";
+import { View, StyleSheet, Platform, Pressable, Text, Image } from "react-native";
 import FormTextField from "../components/FormTextField";
 import { useState, useContext } from "react";
 import { login, loadUser } from "../services/AuthService";
@@ -6,18 +6,40 @@ import AuthContext from "../contexts/AuthContext";
 import PrimaryButton from "../components/PrimaryButton";
 import logo from "../assets/logo/MaternicoLogo.png";
 import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native-web";
 
 export default function LoginScreen() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errors, setErrors] = useState({});
+    const [formSubmitted, setFormSubmitted] = useState(false);
 
     const { setUser } = useContext(AuthContext);
     const navigation = useNavigation();
 
+    const validateForm = () => {
+        let isValid = true;
+        let newErrors = {};
+
+        if (!email.trim()) {
+            newErrors.email = ["El correo electrónico es obligatorio"];
+            isValid = false;
+        }
+
+        if (!password.trim()) {
+            newErrors.password = ["La contraseña es obligatoria"];
+            isValid = false;
+        }
+
+        setErrors(newErrors);
+        return isValid;
+    };
+
     const handleLogin = async () => {
-        setErrors({});
+        setFormSubmitted(true);
+
+        if (!validateForm()) {
+            return;
+        }
 
         try {
             await login({
@@ -57,7 +79,18 @@ export default function LoginScreen() {
                         label="Correo Electrónico"
                         placeholder="ejemplo@correo.com"
                         value={email}
-                        onChangeText={(t) => setEmail(t)}
+                        onChangeText={(t) => {
+                            setEmail(t);
+                            if (formSubmitted) {
+                                const newErrors = {...errors};
+                                if (!t.trim()) {
+                                    newErrors.email = ["El correo electrónico es obligatorio"];
+                                } else {
+                                    delete newErrors.email;
+                                }
+                                setErrors(newErrors);
+                            }
+                        }}
                         keyboardType="email-address"
                         errors={errors.email || []}
                         style={styles.customInput}
@@ -67,7 +100,18 @@ export default function LoginScreen() {
                         label="Contraseña"
                         placeholder="********"
                         value={password}
-                        onChangeText={(t) => setPassword(t)}
+                        onChangeText={(t) => {
+                            setPassword(t);
+                            if (formSubmitted) {
+                                const newErrors = {...errors};
+                                if (!t.trim()) {
+                                    newErrors.password = ["La contraseña es obligatoria"];
+                                } else {
+                                    delete newErrors.password;
+                                }
+                                setErrors(newErrors);
+                            }
+                        }}
                         secureTextEntry
                         errors={errors.password || []}
                         style={styles.customInput}

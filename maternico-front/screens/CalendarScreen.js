@@ -60,7 +60,6 @@ const CalendarScreen = () => {
 	
 	const today = new Date();
 	const date = today.toLocaleString("es-MX", { timeZone: "America/Mexico_City", timeStyle: "long" });
-	console.log(date);
 
 	const exampleEvents = [
 		{
@@ -254,7 +253,7 @@ const CalendarScreen = () => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#fefefe",
+		backgroundColor: "#FEFEFE",
 	},
 	header: {
 		flexDirection: "row",

@@ -50,9 +50,9 @@ const Agenda = ({ events }) => {
             <TouchableOpacity 
                 style={styles.eventCard} 
                 activeOpacity={0.7}
+                key={item.id}
             >
                 <View style={styles.eventCardHeader}>
-                    {getEventIcon()}
                     <Text style={styles.eventTitle}>{item.title}</Text>
                     {item.isNotifiable && <BellAlertIcon color="#E74C3C" size={20} />}
                 </View>
@@ -110,12 +110,13 @@ const Agenda = ({ events }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: "#F5F5F5",
+        borderTopLeftRadius: 20,
+        borderTopRightRadius: 20,
     },
     screenTitle: {
         fontSize: 24,
         fontWeight: "bold",
-        color: "#333",
+        color: "#343434",
         paddingHorizontal: 20,
         paddingTop: 20,
         marginBottom: 10,
@@ -124,17 +125,17 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        backgroundColor: "#F5F5F5",
+        backgroundColor: "#F4F4F4",
     },
     emptyTitle: {
         fontSize: 22,
         fontWeight: "bold",
-        color: "#666",
+        color: "#343434",
         marginBottom: 10,
     },
     emptyText: {
         fontSize: 16,
-        color: "#888",
+        color: "#343434",
     },
     listContainer: {
         paddingHorizontal: 20,
@@ -146,7 +147,7 @@ const styles = StyleSheet.create({
     dateGroupTitle: {
         fontSize: 18,
         fontWeight: "bold",
-        color: "#555",
+        color: "#343434",
         marginBottom: 10,
         backgroundColor: "#E0E0E0",
         paddingVertical: 5,
@@ -154,15 +155,16 @@ const styles = StyleSheet.create({
         borderRadius: 10,
     },
     eventCard: {
-        backgroundColor: "white",
+        backgroundColor: "#FEFEFE",
         borderRadius: 15,
         padding: 15,
         marginBottom: 10,
-        shadowColor: "#000",
+        marginTop: 10,
+        shadowColor: "#343434",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 4,
-        elevation: 3,
+        elevation: 20,
     },
     eventCardHeader: {
         flexDirection: "row",
@@ -174,11 +176,11 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 16,
         fontWeight: "bold",
-        color: "#333",
+        color: "#343434",
         marginLeft: 10,
     },
     eventCardDetails: {
-        paddingLeft: 34,
+        paddingLeft: 20,
     },
     eventDetailRow: {
         flexDirection: "row",
@@ -188,7 +190,7 @@ const styles = StyleSheet.create({
     eventDetailText: {
         marginLeft: 10,
         fontSize: 14,
-        color: "#666",
+        color: "#343434",
     },
 });
 
